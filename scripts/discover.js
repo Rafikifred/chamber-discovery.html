@@ -1,57 +1,56 @@
-// Select containers
-const gridContainer = document.querySelector(".discover-grid");
-const visitMessage = document.querySelector(".visit-message");
+// Wait for DOM content to load
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("cards-container");
+  const visitorMessage = document.getElementById("visitor-message");
 
-// Show visit message using localStorage
-function displayVisitMessage() {
-  const lastVisit = localStorage.getItem("lastVisit");
+  // Display visitor message using localStorage
+  const lastVisitKey = "last-visit";
   const now = Date.now();
+  const lastVisit = localStorage.getItem(lastVisitKey);
 
   if (!lastVisit) {
-    visitMessage.textContent = "Welcome! Let us know if you have any questions.";
+    visitorMessage.textContent = "Welcome! Let us know if you have any questions.";
   } else {
-    const diff = now - lastVisit;
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    if (days === 0) {
-      visitMessage.textContent = "Back so soon! Awesome!";
-    } else if (days === 1) {
-      visitMessage.textContent = "You last visited 1 day ago.";
+    const diff = now - Number(lastVisit);
+    const diffDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+    if (diffDays < 1) {
+      visitorMessage.textContent = "Back so soon! Awesome!";
+    } else if (diffDays === 1) {
+      visitorMessage.textContent = "You last visited 1 day ago.";
     } else {
-      visitMessage.textContent = `You last visited ${days} days ago.`;
+      visitorMessage.textContent = `You last visited ${diffDays} days ago.`;
     }
   }
-  localStorage.setItem("lastVisit", now);
-}
+  localStorage.setItem(lastVisitKey, now.toString());
 
-// Load JSON data and build discover cards
-async function buildDiscoverCards() {
-  try {
-    const response = await fetch("data/discover.json");
-    if (!response.ok) throw new Error("Failed to load places data.");
-    const places = await response.json();
+  // Fetch JSON data and create cards
+  fetch("data/places.json")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      data.forEach((place) => {
+        const card = document.createElement("article");
+        card.classList.add("card");
 
-    places.forEach((place, index) => {
-      const card = document.createElement("article");
-      card.className = "card";
-      card.style.gridArea = `card${index + 1}`;
+        card.innerHTML = `
+          <h2>${place.title}</h2>
+          <figure>
+            <img src="${place.image}" alt="${place.title}" loading="lazy" />
+          </figure>
+          <address>${place.address}</address>
+          <p>${place.description}</p>
+          <button type="button" aria-label="Learn more about ${place.title}">Learn More</button>
+        `;
 
-      card.innerHTML = `
-        <h2>${place.name}</h2>
-        <figure>
-          <img src="${place.image}" alt="Photo of ${place.name}" loading="lazy" />
-        </figure>
-        <address>${place.address}</address>
-        <p>${place.description}</p>
-        <button type="button" aria-label="Learn more about ${place.name}">Learn More</button>
-      `;
-
-      gridContainer.appendChild(card);
+        container.appendChild(card);
+      });
+    })
+    .catch((error) => {
+      container.innerHTML = "<p>Sorry, we couldn't load the places at this time.</p>";
+      console.error("Fetch error:", error);
     });
-  } catch (error) {
-    gridContainer.textContent = "Sorry, we could not load the places data.";
-    console.error(error);
-  }
-}
-
-displayVisitMessage();
-buildDiscoverCards();
+});

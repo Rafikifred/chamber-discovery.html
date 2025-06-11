@@ -1,117 +1,72 @@
-/* Reset and base styles */
+/* Basic reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  background-color: #f5f5f5;
-  color: #222;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background: #f4f4f4;
+  color: #333;
 }
 
-header, footer {
-  background-color: #003366;
+header {
+  background-color: #004080;
   color: white;
-  padding: 1rem;
+  padding: 1rem 2rem;
 }
 
-header h1, footer p {
+header h1 {
   margin-bottom: 0.5rem;
 }
 
-nav ul {
+nav ul.nav-menu {
+  list-style: none;
   display: flex;
   gap: 1rem;
-  list-style: none;
 }
 
-nav a {
+nav ul.nav-menu li a {
   color: white;
   text-decoration: none;
-  padding: 0.5rem 0.75rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 4px;
 }
 
-nav a:hover,
-nav a:focus,
-nav a[aria-current="page"] {
-  background-color: #0055a5;
-  outline: none;
+nav ul.nav-menu li a:hover,
+nav ul.nav-menu li a.active {
+  background-color: #0066cc;
 }
 
 main {
-  flex-grow: 1;
-  padding: 1rem;
-}
-
-/* Directory list */
-ul {
-  list-style: disc inside;
-  margin-top: 1rem;
-}
-
-/* Join form */
-form label {
-  font-weight: bold;
-}
-
-form input {
-  width: 100%;
-  max-width: 400px;
-  padding: 0.5rem;
-  margin-top: 0.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-form button {
-  background-color: #003366;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-form button:hover,
-form button:focus {
-  background-color: #0055a5;
-  outline: none;
-}
-
-/* Discover page grid */
-.discover-main {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.visit-message {
-  background-color: #e0f0ff;
+#visitor-message {
+  background: #e0f7fa;
   padding: 1rem;
-  border-radius: 8px;
+  border-radius: 6px;
   font-weight: bold;
-  height: fit-content;
 }
 
-/* Discover grid cards */
-.discover-grid {
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
+/* Card style */
 .card {
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -124,16 +79,23 @@ form button:focus {
 }
 
 .card figure {
-  margin: 0;
   margin-bottom: 0.5rem;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
 .card img {
   width: 100%;
-  border-radius: 6px;
-  height: auto;
-  aspect-ratio: 4/3;
+  height: 200px;
   object-fit: cover;
+  transition: filter 0.3s ease;
+}
+
+@media (hover: hover) and (min-width: 641px) {
+  /* Hover effect for images on medium+ screens */
+  .card img:hover {
+    filter: brightness(80%) contrast(120%);
+  }
 }
 
 .card address {
@@ -144,32 +106,60 @@ form button:focus {
 
 .card p {
   flex-grow: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .card button {
-  align-self: flex-start;
-  padding: 0.5rem 1rem;
-  border: none;
-  background-color: #003366;
+  background-color: #004080;
   color: white;
-  border-radius: 4px;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
   cursor: pointer;
+  align-self: flex-start;
+  transition: background-color 0.3s ease;
 }
 
-.card button:hover,
-.card button:focus {
-  background-color: #0055a5;
-  outline: none;
+.card button:hover {
+  background-color: #0066cc;
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .discover-main {
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #004080;
+  color: white;
+  margin-top: 2rem;
+}
+
+/* Responsive layout using grid-template-areas for discover page cards */
+
+@media (max-width: 640px) {
+  main {
     grid-template-columns: 1fr;
   }
+  #visitor-message {
+    grid-column: 1;
+  }
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
 
-  nav ul {
-    flex-direction: column;
+@media (min-width: 641px) and (max-width: 1024px) {
+  main {
+    grid-template-columns: 1fr 3fr;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  main {
+    grid-template-columns: 1fr 3fr;
+  }
+  .cards-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }

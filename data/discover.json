@@ -27,24 +27,24 @@
     "name": "Historic Library",
     "address": "202 Library Ln",
     "description": "Old books and community programs.",
-    "image": "images/library.webp"
+    "image": "images/library.jpeg"
   },
   {
     "name": "Art Gallery",
     "address": "303 Art Blvd",
     "description": "Contemporary art exhibits and workshops.",
-    "image": "images/artgallery.webp"
+    "image": "images/artgallery.jpeg"
   },
   {
     "name": "Sports Complex",
     "address": "404 Sports Dr",
     "description": "Facilities for various sports and events.",
-    "image": "images/sportscomplex.webp"
+    "image": "images/sportscomplex.jpeg"
   },
   {
     "name": "City Zoo",
     "address": "505 Zoo Rd",
     "description": "Animals from around the world in natural habitats.",
-    "image": "images/zoo.webp"
+    "image": "images/zoo.jpeg"
   }
 ]
