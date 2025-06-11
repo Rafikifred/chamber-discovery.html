@@ -1,0 +1,50 @@
+[
+  {
+    "name": "City Museum",
+    "address": "123 Museum Rd",
+    "description": "Explore local history and art exhibits.",
+    "image": "images/museum.jpeg"
+  },
+  {
+    "name": "River Park",
+    "address": "456 River St",
+    "description": "A beautiful park along the river with walking trails.",
+    "image": "images/riverpark.jpeg"
+  },
+  {
+    "name": "Downtown Theater",
+    "address": "789 Main St",
+    "description": "Live performances and cinema screenings.",
+    "image": "images/theater.jpeg"
+  },
+  {
+    "name": "Farmers Market",
+    "address": "101 Market Ave",
+    "description": "Fresh local produce every weekend.",
+    "image": "images/farmersmarket.jpeg"
+  },
+  {
+    "name": "Historic Library",
+    "address": "202 Library Ln",
+    "description": "Old books and community programs.",
+    "image": "images/library.webp"
+  },
+  {
+    "name": "Art Gallery",
+    "address": "303 Art Blvd",
+    "description": "Contemporary art exhibits and workshops.",
+    "image": "images/artgallery.webp"
+  },
+  {
+    "name": "Sports Complex",
+    "address": "404 Sports Dr",
+    "description": "Facilities for various sports and events.",
+    "image": "images/sportscomplex.webp"
+  },
+  {
+    "name": "City Zoo",
+    "address": "505 Zoo Rd",
+    "description": "Animals from around the world in natural habitats.",
+    "image": "images/zoo.webp"
+  }
+]
